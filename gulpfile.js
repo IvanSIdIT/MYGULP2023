@@ -54,19 +54,15 @@ function browsersync() {
 
 exports.browsersync = browsersync;
 
-//BUILD
+//BUILD + CLEAN
+
+const clean = require("gulp-clean");
 
 function building() {
   return src(["app/css/style.min.css", "app/js/main.min.js", "app/**/*.html"], {
     base: "app",
   }).pipe(dest("dist"));
 }
-
-//exports.building = building;
-
-//CLEAN
-
-const clean = require("gulp-clean");
 
 function cleanDist() {
   return src("dist").pipe(clean());

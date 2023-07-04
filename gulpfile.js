@@ -1,35 +1,16 @@
-const { src, dest, watch, parallel, series } = require("gulp");
+//COMMON VARIABLES
 
-//VARIABLES
-const autoprefixer = require("gulp-autoprefixer");
-const scss = require("gulp-sass")(require("sass"));
+const { src, dest, watch, parallel, series } = require("gulp");
 const concat = require("gulp-concat");
+const browserSync = require("browser-sync").create();
+
+//IMAGES
+
+const newer = require("gulp-newer");
+const imagemin = require("gulp-imagemin");
 const avif = require("gulp-avif");
 const webp = require("gulp-webp");
 const imagemin = require("gulp-imagemin");
-const newer = require("gulp-newer");
-//const svgSprite = require("gulp-svg-sprite");
-
-//SPRITE
-
-// function sprite() {
-//   return src("app/images/dist/*.svg")
-//     .pipe(
-//       svgSprite({
-//         mode: {
-//           stack: {
-//             sprite: "../sprite.svg",
-//             example: true,
-//           },
-//         },
-//       })
-//     )
-//     .pipe(dest("app/images/dist"));
-// }
-
-// exports.sprite = sprite;
-
-//IMAGES
 
 function images() {
   return src(["app/images/src/*.*", "!app/images/src/*.svg"])
@@ -47,6 +28,11 @@ function images() {
     .pipe(dest("app/images"));
 }
 exports.images = images;
+
+//STYLES
+
+const autoprefixer = require("gulp-autoprefixer");
+const scss = require("gulp-sass")(require("sass"));
 
 function styles() {
   return src("app/scss/style.scss")
@@ -74,7 +60,6 @@ function scripts() {
 exports.scripts = scripts;
 
 //WATCHING
-const browserSync = require("browser-sync").create();
 
 function watching() {
   browserSync.init({

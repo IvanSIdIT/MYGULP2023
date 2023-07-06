@@ -68,7 +68,10 @@ function watching() {
     },
   });
   watch(["app/images/src"], images);
-  watch(["app/scss/style.scss", "app/scss/components/*.*"], styles);
+  watch(
+    ["app/scss/style.scss", "app/scss/components/*.*", "app/scss/*.*"],
+    styles
+  );
   watch(["app/js/main.js"], scripts);
   watch(["app/*.html"]).on("change", browserSync.reload);
 }
